@@ -1,0 +1,78 @@
+@media (max-width: 1370px) {
+  .ok,
+  .reading,
+  .books {
+    width: 350px;
+  }
+  .text1,
+  .text3 {
+    padding-right: 50px;
+  }
+  .text2 {
+    padding-left: 50px;
+  }
+}
+
+@media (max-width: 1290px) {
+  .aboutBlock {
+    flex-direction: column-reverse;
+  }
+  .aboutBlockR {
+    flex-direction: column;
+  }
+  .text1,
+  .text2,
+  .text3 {
+    width: auto;
+    text-align: start;
+    padding: 0;
+    margin-block: 50px;
+  }
+  .text1 {
+    margin: 0;
+    margin-bottom: 50px;
+  }
+}
+
+@media (max-width: 1010px) {
+  .title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 862px) {
+  .aboutMainBlock {
+    padding: 40px;
+  }
+  .imageBlock {
+    width: auto;
+  }
+}
+
+@media (max-width: 672px) {
+  .ok,
+  .reading,
+  .books {
+    width: 270px;
+  }
+}
+
+@media (max-width: 580px) {
+  .title {
+    font-size: 1.8rem;
+  }
+  .text1,
+  .text2,
+  .text3 {
+    font-size: 1rem;
+  }
+  .aboutMainBlock {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 466px) {
+    .title {
+        font-size: 1.6rem;
+    }
+}

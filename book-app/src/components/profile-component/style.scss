@@ -1,0 +1,22 @@
+@media (max-width: 1365px) {
+  .profileImage {
+    display: none;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 686px) {
+  .personalData {
+    flex-direction: column;
+  }
+  .detailsBlock {
+    align-items: start;
+  }
+  .changeBlock {
+    width: 271px;
+    align-items: start;
+  }
+}

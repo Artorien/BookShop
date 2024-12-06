@@ -1,0 +1,43 @@
+.header-element {
+  box-shadow: 0 0 20px #efefef;
+}
+
+.logout {
+  background-color: black;
+  transition: all 0.4s;
+  color: white;
+
+  &:hover {
+    background-color: rgb(48, 47, 47);
+    transition: 0.4s all;
+    color: white;
+  }
+}
+
+@media (max-width: 840px) {
+  .search {
+    width: 200px;
+    margin-left: 50px;
+  }
+  .lucide-search {
+    left: 56px;
+  }
+}
+
+@media (max-width: 616px) {
+  .titleLink {
+    display: none;
+  }
+  .search {
+    margin: 0;
+  }
+  .lucide-search {
+    left: 6px;
+  }
+}
+
+@media (max-width: 490px) {
+  .header-element {
+    padding-right: 7px;
+  }
+}

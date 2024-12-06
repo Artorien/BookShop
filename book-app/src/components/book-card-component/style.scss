@@ -1,0 +1,78 @@
+.bookTitleBlock {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 60px;
+}
+
+.props {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1881px) {
+  .bookCardContainer {
+    gap: 25px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 1275px) {
+  .card {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 1155px) {
+  .imageCard {
+    width: 170px;
+    height: 240px;
+  }
+  .bookProps {
+    width: 170px;
+  }
+  .truncated-title {
+    width: 170px;
+  }
+  .card {
+    padding: 15px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 464px;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 1030px) {
+  .imageCard {
+    width: 140px;
+    height: 210px;
+    padding: 10px;
+  }
+  .bookProps {
+    width: 140px;
+  }
+  .truncated-title {
+    width: 140px;
+  }
+  .card {
+    box-shadow: none;
+    padding: 1;
+  }
+}
+
+@media (max-widthg: 915px) {
+  .bookCardContainer {
+    gap: 35px;
+  }
+}
+
+@media (max-width: 700px) {
+  .bookCardContainer {
+    gap: 0;
+  }
+}

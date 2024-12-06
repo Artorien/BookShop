@@ -1,0 +1,41 @@
+@media (max-width: 1700px) {
+  .contactBlock {
+    width: 80%;
+  }
+}
+
+@media (max-width: 1500px) {
+  .contactBlock {
+    width: 90%;
+  }
+}
+
+@media (max-width: 1330px) {
+  .linkBlock {
+    display: block;
+  }
+  .formBlock {
+    display: none;
+  }
+  .titleBlock {
+    justify-content: center;
+  }
+  .contactWithUsBlock {
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+  }
+  .container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 700px) {
+  .personalInfoBlock {
+    display: flex;
+    flex-direction: column;
+  }
+}

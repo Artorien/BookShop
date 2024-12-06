@@ -1,0 +1,15 @@
+@media (max-width: 676px) {
+  .personalInfoBlock {
+    display: flex;
+    flex-direction: column;
+  }
+  .title {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .title {
+    font-size: 1.4rem;
+  }
+}
