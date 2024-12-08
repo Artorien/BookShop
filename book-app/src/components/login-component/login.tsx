@@ -18,7 +18,7 @@ export default function Login() {
     dispatch(setIsWishlist(false));
   }, [dispatch]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login(email, password);
   };

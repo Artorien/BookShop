@@ -1,7 +1,7 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { ReactReader } from "../../lib/index";
-import type { Contents, Rendition } from "epubjs";
+import type { Rendition } from "epubjs";
 import { Example } from "./example";
 
 export function Basic({ blob }: { blob: Blob }) {

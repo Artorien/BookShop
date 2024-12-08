@@ -11,6 +11,7 @@ import {
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import { clearUser } from "@/redux/slice";
+import { RootInterface } from "@/types/user";
 
 const AuthContext = createContext({
   user: null,
@@ -80,7 +81,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     if (response.ok) {
       const userData = await response.json();
       setUser(userData);
-      setLoginMessage(null);
+      setLoginMessage("");
       localStorage.setItem("user", JSON.stringify(userData));
       toast("You`ve logged in");
       // setTimeout(() => {

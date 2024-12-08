@@ -6,16 +6,18 @@ import { setUser } from "@/redux/slice";
 import { toast } from "sonner";
 import Link from "next/link";
 import "./style.scss";
+import { Book } from "@/types/book";
+import { RootInterface } from "@/types/user";
 
 // interface Book {
 //   title:string;
 
 // }
-export default function BookCard(properties) {
+export default function BookCard(properties: Book) {
   const [isHovered, setIsHovered] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const [isBought, setIsBought] = useState(false);
-  const user = useSelector((state: any) => state.user.user);
+  const user = useSelector((state: RootInterface) => state.user.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -35,12 +37,12 @@ export default function BookCard(properties) {
   const handleAddToWishList = async () => {
     if (user) {
       const response = isAdded
-        ? await removeFromWishList(properties.title, user?.token)
-        : await AddToWishList(properties.title, user?.token);
+        ? await removeFromWishList(properties.title, user?.jwtToken)
+        : await AddToWishList(properties.title, user?.jwtToken);
 
       if (response) {
         const updatedWishlist = isAdded
-          ? user.wishlist.filter((title) => title !== properties.title)
+          ? user.wishlist.filter((title: string) => title !== properties.title)
           : [...user.wishlist, properties.title];
 
         const updatedUser = { ...user, wishlist: updatedWishlist };
@@ -55,14 +57,14 @@ export default function BookCard(properties) {
   };
 
   return (
-    <div className="p-[40px] pb-[20px] rounded-2xl shadowclass mb-[20px] card">
+    <div className="p-[40px] pb-[20px] rounded-2xl shadowclass mb-[20px] card ">
       <div
         className="w-[200px] h-[270px]  bg-[#f7f7f7] p-[20px] flex justify-center items-center relative imageCard"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <Image
-          src={properties.image}
+          src={properties.image || ""}
           alt="book cover"
           width={200}
           height={270}

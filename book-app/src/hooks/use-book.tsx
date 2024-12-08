@@ -1,13 +1,15 @@
 import { getBookByTitle } from "@/lib/data";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsWishlist, setUser } from "@/redux/slice";
+import { setUser } from "@/redux/slice";
+import { Book } from "@/types/book";
+import { RootInterface } from "@/types/user";
 
 export const useBook = (title: string) => {
-  const [book, setBook] = useState(null);
+  const [book, setBook] = useState<Book | null>(null);
   const [isBought, setIsBought] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state: RootInterface) => state.user.user);
   const dispatch = useDispatch();
 
   const fetchBook = useCallback(async () => {
@@ -29,8 +31,10 @@ export const useBook = (title: string) => {
   }, [fetchBook, dispatch]);
 
   useEffect(() => {
-    if (user?.purchasesLocalMemory.includes(book?.title)) {
-      setIsBought(true);
+    if (user?.purchasesLocalMemory && book?.title) {
+      if (user.purchasesLocalMemory.includes(book.title)) {
+        setIsBought(true);
+      }
     }
   }, [user, book]);
 

@@ -19,7 +19,7 @@ export default function ClientLayout({
         <div className="flex">
           <Sidebar></Sidebar>
           <motion.div
-            className="w-full childContainer h-fit rounded-2xl p-[30px] mr-[50px] flex justify-center"
+            className="w-full childContainer h-fit rounded-2xl p-[30px] mr-[50px] mt-[70px] flex justify-center"
             transition={{ type: "spring", damping: 18, mass: 0.75 }}
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

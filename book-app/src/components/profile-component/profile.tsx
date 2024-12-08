@@ -4,10 +4,11 @@ import { setIsStore, setIsWishlist } from "@/redux/slice";
 import Link from "next/link";
 import Image from "next/image";
 import "./style.scss";
+import { User } from "@/types/user";
 
 export default function UserProfile() {
   const dispatch = useDispatch();
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     dispatch(setIsStore(false));
@@ -26,9 +27,7 @@ export default function UserProfile() {
       <div className="grid grid-cols-[1fr_1fr] container">
         <div className="col-start-1 flex flex-col items-center w-full justify-center">
           <div className="flex justify-center items-start flex-col detailsBlock">
-            <h2 className="text-[1.2rem] mb-[25px]">
-              My Credentials:
-            </h2>
+            <h2 className="text-[1.2rem] mb-[25px]">My Credentials:</h2>
             <div className="bg-[#f7f7f7] rounded-xl p-[30px] flex flex-col">
               <div>
                 <div className="flex gap-8 personalData">
@@ -41,7 +40,7 @@ export default function UserProfile() {
                       name="email"
                       readOnly
                       className="rounded-xl py-[5px] px-[15px]"
-                      value={user.email}
+                      value={user?.email}
                     />
                   </div>
                   <div className="flex flex-col relative">
@@ -53,7 +52,7 @@ export default function UserProfile() {
                       className="rounded-xl py-[5px] px-[15px]"
                       name="dateOfCreation"
                       readOnly
-                      value={user.dateOfCreation}
+                      value={user?.dateOfCreation}
                     />
                   </div>
                 </div>

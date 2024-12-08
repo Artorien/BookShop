@@ -6,14 +6,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { setIsStore, setIsWishlist } from "@/redux/slice";
+import { setIsWishlist } from "@/redux/slice";
 
 export default function Library() {
   const { user } = useAuth();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // dispatch(setIsStore(false));
     dispatch(setIsWishlist(false));
   }, [dispatch]);
 

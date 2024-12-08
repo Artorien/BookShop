@@ -5,18 +5,21 @@ import { useCallback, useEffect, useState } from "react";
 import Skeleton from "../skeleton-component/skeleton";
 import BookCard from "../book-card-component/book-card";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsStore, setIsWishlist } from "@/redux/slice";
 import Image from "next/image";
 import { setUser } from "@/redux/slice";
 import Pagination from "../pagination-component/pagination";
+import { Book } from "@/types/book";
+import { RootState } from "@/types/search";
 
 export default function MyShop() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Book[]>([]);
   const [page, setPage] = useState(0);
   const [size, setSize] = useState(15);
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const searchData = useSelector((state) => state.searchValues.searchValues);
+  const searchData = useSelector(
+    (state: RootState) => state.searchValues.searchValues
+  );
   const dispatch = useDispatch();
 
   const fetchBooks = useCallback(async (page: number) => {
@@ -31,7 +34,7 @@ export default function MyShop() {
         setSize(response.size);
       }
     } catch (error) {
-      console.error("Failed to fetch the books");
+      console.error("Failed to fetch the books: " + error);
     } finally {
       setIsLoading(false);
     }
@@ -89,8 +92,8 @@ export default function MyShop() {
           [...new Array(6)].map((_, index) => <Skeleton key={index} />)
         ) : data.length > 0 ? (
           <div className="flex flex-wrap gap-[30px] bookCardContainer">
-            {data.map((book, index) => (
-              <BookCard key={index} {...book} className="mb-[20px]"></BookCard>
+            {data.map((book: Book, index) => (
+              <BookCard key={index} {...book}></BookCard>
             ))}
           </div>
         ) : (
@@ -108,8 +111,9 @@ export default function MyShop() {
           </div>
         )}
       </div>
-      <Pagination totalPages={totalPages} setPage={setPage}></Pagination>
-      {/*  */}
+      {size >= 15 ? (
+        <Pagination totalPages={totalPages} setPage={setPage}></Pagination>
+      ) : null}
       {/* Removed this code to another component for better readability */}
       {/* <div className="flex justify-between items-center min-w-[70px] mt-[90px]">
         {!isLoading && totalPages !== 0 && data.length > 0 && size >= 15

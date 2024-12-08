@@ -5,11 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setIsStore, setUser } from "@/redux/slice";
 import { MyLibrary } from "@/lib/data";
 import BookCard from "../book-card-component/book-card";
+import { Book } from "@/types/book";
+import { RootInterface } from "@/types/user";
 
 export default function Books() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  const [books, setBooks] = useState("");
+  const user = useSelector((state : RootInterface) => state.user.user);
+  const [books, setBooks] = useState([]);
 
   const fetchBooks = async (token: string) => {
     const response = await MyLibrary(token);
@@ -27,7 +29,7 @@ export default function Books() {
 
   useEffect(() => {
     if (user) {
-      fetchBooks(user?.token);
+      fetchBooks(user?.jwtToken);
     }
   }, [user]);
 
@@ -37,7 +39,7 @@ export default function Books() {
       <div className="flex justify-center w-fit">
         {books.length > 0 ? (
           <div className="flex flex-wrap gap-[30px] bookCardContainer">
-            {books.map((book, index) => (
+            {books.map((book: Book, index) => (
               <BookCard key={index} {...book}></BookCard>
             ))}
           </div>

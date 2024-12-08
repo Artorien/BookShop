@@ -100,7 +100,7 @@ public class UserController {
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-            user.setToken(jwt);
+            user.setJwtToken(jwt);
             userService.updateUser(user);
 
             System.out.println(ResponseEntity.ok(user));
@@ -181,6 +181,10 @@ public class UserController {
             int start = (int) Math.min((long) page * size, wishlistBooks.size());
             int end = Math.min(start + size, wishlistBooks.size());
             List<BookResponse> paginatedList = wishlistBooks.subList(start, end);
+
+            if (!paginatedList.isEmpty()) {
+                size = paginatedList.size();
+            }
 
             return ResponseEntity.ok(new PageImpl<>(paginatedList, PageRequest.of(page, size), wishlistBooks.size()));
         }
@@ -283,14 +287,20 @@ public class UserController {
 
         if (optionalUser.isPresent()) {
             User user = optionalUser.get();
-//
-//            user.setToken(null);
-//            userService.updateUser(user);
-//
-            return ResponseEntity.ok(user);
-//            return ResponseEntity.ok("Successfully verified");
+
+            if (user.getToken().equals(token))
+            {
+                String jwt = jwtTokenFactory.generateToken(user.getEmail());
+                user.setToken(null);
+                user.setJwtToken(jwt);
+                userService.updateUser(user);
+
+                return ResponseEntity.ok(user);
+            }
+
+            return ResponseEntity.status(HttpStatus.CONFLICT).body("Email verification failed - token failure");
         }
 
-        return ResponseEntity.status(HttpStatus.CONFLICT).body("Email verification failed");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("Email verification failed, unable to find a user");
     }
 }

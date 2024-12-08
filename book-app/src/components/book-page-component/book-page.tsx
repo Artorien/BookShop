@@ -1,19 +1,20 @@
 "use client";
 
 import Image from "next/image";
+import { BookProperties } from "@/types/book";
 import stripePromise from "@/lib/stripe";
 import { createCheckoutSession } from "@/lib/data";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 // import { setRead } from "@/redux/slice";
 import { useBook } from "@/hooks/use-book";
 import "./style.scss";
 
-export default function BookPageComponent(properties) {
+export default function BookPageComponent(properties : BookProperties) {
   // const [book, setBook] = useState(null);
   // const user = useSelector((state) => state.user.user);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // const [isBought, setIsBought] = useState(false);
   const router = useRouter();
   const { book, user, isBought, isLoading } = useBook(properties.title);
@@ -86,7 +87,7 @@ export default function BookPageComponent(properties) {
             <Image
               width={300}
               height={450}
-              src={book?.image}
+              src={book?.image || ""}
               alt="book image"
               loading="lazy"
               className="bookCover"
@@ -114,7 +115,7 @@ export default function BookPageComponent(properties) {
             <button
               className="rounded-xl text-[1.1rem] flex items-center justify-center border py-[5px] px-[15px] mt-[10px] signup w-[200px] bookTitle"
               onClick={() =>
-                handleCheckout(user?.token, book?.title, book?.price)
+                handleCheckout(user?.token || "", book?.title || "", book?.price || 0)
               }
             >
               Buy

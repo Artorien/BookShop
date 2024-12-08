@@ -4,10 +4,8 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import "./style.scss";
 import { useAuth } from "@/contexts/Auth-context";
-import { button } from "framer-motion/client";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { data, SearchResponse } from "@/lib/data";
+import { useDispatch } from "react-redux";
+import { data } from "@/lib/data";
 import { fetchSearchValues } from "@/redux/slice";
 import { usePathname } from "next/navigation";
 import {
@@ -22,7 +20,6 @@ const dataSource = data;
 
 export default function Header() {
   const { user, logout } = useAuth();
-  const isStore = useSelector((state) => state.isStore.isStore);
   const dispatch = useDispatch();
   const pathname = usePathname();
   console.log(pathname);
@@ -31,7 +28,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex py-[35px] px-[50px] justify-between overflow-hidden header-element mb-[50px]">
+    <header className="flex py-[35px] px-[50px] justify-between overflow-hidden header-element mb-[50px h-[70px]">
       <motion.div
         className="items-center flex justify-between col-start-2"
         transition={{ type: "spring", damping: 18, mass: 0.75 }}

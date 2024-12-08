@@ -1,13 +1,14 @@
 "use client";
+import { toast } from "sonner";
 import "./style.scss";
 
 export function ContactForm() {
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     toast("Message has been sent");
   };
   return (
-    <form action={handleSubmit} method="post" className="flex flex-col gap-8">
+    <form onSubmit={handleSubmit} method="post" className="flex flex-col gap-8">
       <div className="flex gap-8 personalInfoBlock">
         <div className="flex flex-col">
           <label htmlFor="first-name" className="mb-[5px]">

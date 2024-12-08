@@ -10,7 +10,7 @@ export default function VerificationProcess() {
   const token = searchParams.get('token');
 
   useEffect(() => {
-    verification(token);
+    verification(token || "");
   }, []);
 
   return (

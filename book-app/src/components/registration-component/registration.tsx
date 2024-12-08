@@ -1,10 +1,9 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
-import AuthProvider, { useAuth } from "@/contexts/Auth-context";
+import { useState } from "react";
+import { useAuth } from "@/contexts/Auth-context";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
-import { setIsStore, setIsWishlist } from "@/redux/slice";
+
 import "../login-component/style.scss";
 
 export default function Registration() {
@@ -12,7 +11,7 @@ export default function Registration() {
   const [password, setPassword] = useState("");
   const { error, registration } = useAuth();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     registration(email, password);
   };

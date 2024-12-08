@@ -1,6 +1,5 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
 import ReadBookPage from "@/components/read-book-component/read-book";
 import { useEffect } from "react";
 import { useAuth } from "@/contexts/Auth-context";

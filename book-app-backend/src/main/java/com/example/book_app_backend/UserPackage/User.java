@@ -2,6 +2,7 @@ package com.example.book_app_backend.UserPackage;
 
 import com.example.book_app_backend.BookPackage.Book;
 import com.example.book_app_backend.PurchasePackage.Purchase;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -16,11 +17,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String email;
+    @JsonIgnore
     private String password;
     private String dateOfCreation;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Purchase> purchases;
     private String token;
+    private String jwtToken;
     @ElementCollection
     private List<String> wishlist;
     @ElementCollection
@@ -37,7 +40,8 @@ public class User {
                 List<Purchase> purchases,
                 String token,
                 List<String> wishlist,
-                List<String> purchasesLocalMemory) {
+                List<String> purchasesLocalMemory,
+                String jwtToken) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -46,6 +50,7 @@ public class User {
         this.token = token;
         this.wishlist = wishlist;
         this.purchasesLocalMemory = purchasesLocalMemory;
+        this.jwtToken = jwtToken;
     }
 
     public UUID getId() {
@@ -110,5 +115,13 @@ public class User {
 
     public void setPurchasesLocalMemory(List<String> purchasesLocalMemory) {
         this.purchasesLocalMemory = purchasesLocalMemory;
+    }
+
+    public String getJwtToken() {
+        return this.jwtToken;
+    }
+
+    public void setJwtToken(String jwtToken) {
+        this.jwtToken = jwtToken;
     }
 }

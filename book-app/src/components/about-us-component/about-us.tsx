@@ -138,7 +138,7 @@ export default function AboutUs() {
             ></Image>
           </div>
           <p className="w-[50%] text-[1.3rem] pl-[68px] text2">
-            We've collected more than 30.000 books around the world so you would
+            We&apos;ve collected more than 30.000 books around the world so you would
             never face a problem of not finding a book of your liking!
           </p>
         </motion.div>

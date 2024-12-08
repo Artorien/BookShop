@@ -7,18 +7,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slice";
 import { setIsWishlist } from "@/redux/slice";
 import Pagination from "../pagination-component/pagination";
+import { RootInterface, UserInterface } from "@/types/user";
+import { Book } from "@/types/book";
+import { RootClear } from "@/types/clear-wishlist";
 
-export default function WishlistComponent(properties) {
+export default function WishlistComponent(properties: UserInterface) {
   const [wishlistData, setWishlistData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const [page, setPage] = useState(0);
-  const [size, setSize] = useState(15);
+  const [size, setSize] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const clearWishlist = useSelector(
-    (state) => state.clearWishList.clearWishList
+    (state: RootClear) => state.clearWishList.clearWishList
   );
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state: RootInterface) => state.user.user);
+
+  console.log("Data: " + wishlistData);
 
   // Why this code is bad: fetching the data each re-render, so added `useCallBack`. Also added try-catch
   // const handleWishlistRetrieve = async (token: string, page: number) => {
@@ -71,16 +76,20 @@ export default function WishlistComponent(properties) {
   }, [clearWishlist, user]);
 
   useEffect(() => {
-    handleWishlistRetrieve(properties.user.token, page);
-  }, [properties.user.token, page, handleWishlistRetrieve]);
+    handleWishlistRetrieve(properties.user.jwtToken, page);
+  }, [properties.user.jwtToken, page, handleWishlistRetrieve]);
 
   return (
     <div className="flex flex-col justify-center items-center py-[90px]">
       <h1 className="text-[2rem] mb-[90px]">Wishlist</h1>
       <div className="flex justify-center w-fit">
-        {wishlistData.length > 0 ? (
+        {isLoading ? (
+          <div className="flex justify-center">
+            <p className="text-[1.1rem]">Loading...</p>
+          </div>
+        ) : wishlistData.length > 0 ? (
           <div className="flex flex-wrap gap-[30px] bookCardContainer">
-            {wishlistData.map((book, index) => (
+            {wishlistData.map((book: Book, index) => (
               <BookCard key={index} {...book}></BookCard>
             ))}
           </div>
@@ -90,6 +99,9 @@ export default function WishlistComponent(properties) {
           </div>
         )}
       </div>
+      {size >= 15 ? (
+        <Pagination totalPages={totalPages} setPage={setPage}></Pagination>
+      ) : null}
     </div>
     // <div className="py-[90px]">
     //   <h1 className="text-[2rem] mb-[90px]">Your wishlist</h1>
@@ -110,7 +122,6 @@ export default function WishlistComponent(properties) {
     //       </div>
     //     )}
     //   </div>
-    //   <Pagination totalPages={totalPages} setPage={setPage}></Pagination>
     // </div>
   );
 }

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slice";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { setClearWishList } from "@/redux/slice";
 import {
   Dialog,
@@ -16,9 +16,10 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { usePathname } from "next/navigation";
+import { RootInterface } from "@/types/user";
 
 export default function Sidebar() {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state: RootInterface) => state.user.user);
   const dispatch = useDispatch();
   const pathname = usePathname();
   const handleDelete = async (token: string) => {
@@ -147,7 +148,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <div className="px-[50px] w-[170px] mr-[100px] sidebar">
+      <div className="px-[50px] w-[170px] mr-[100px] mt-[70px] sidebar">
         {data.map((item, index) => (
           <Link href={item.link} key={index}>
             <motion.div
@@ -210,7 +211,7 @@ export default function Sidebar() {
                 <DialogClose>
                   <button
                     className="px-4 py-2 bg-red-600 text-white rounded-md"
-                    onClick={() => handleDelete(user?.token)}
+                    onClick={() => handleDelete(user?.jwtToken)}
                   >
                     Confirm
                   </button>

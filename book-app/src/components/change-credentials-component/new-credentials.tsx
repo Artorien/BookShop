@@ -8,6 +8,8 @@ import "./style.scss";
 export default function NewCredentials() {
   const [newEmail, setNewEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [newPasswordConfirmation, setNewPasswordConfirmation] = useState("");
+  const [error, setError] = useState("");
   const { updateUserDetails } = useAuth();
   const dispatch = useDispatch();
   const parsedUser = localStorage.getItem("user");
@@ -17,9 +19,15 @@ export default function NewCredentials() {
     dispatch(setIsWishlist(false));
   }, [dispatch]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    updateUserDetails(user?.email, newEmail, newPassword);
+
+    if (newPasswordConfirmation == newPassword) {
+      setError("");
+      updateUserDetails(user?.email, newEmail, newPassword);
+    } else {
+      setError("Your password mismatch. Please try again");
+    }
   };
 
   return (
@@ -33,7 +41,7 @@ export default function NewCredentials() {
           onSubmit={handleSubmit}
           className="flex flex-col gap-8"
         >
-          <div className="flex gap-8 personalInfoBlock">
+          <div className="flex gap-8 personalInfoBlock flex-col">
             <div className="flex flex-col">
               <label htmlFor="email" className="mb-[5px]">
                 New email
@@ -41,7 +49,7 @@ export default function NewCredentials() {
               <input
                 type="email"
                 name="email"
-                className="rounded-xl py-[5px] px-[15px]"
+                className="rounded-xl py-[5px] px-[15px] w-[350px] emailInput"
                 placeholder="example@email.com"
                 required
                 onChange={(e) => setNewEmail(e.target.value)}
@@ -59,6 +67,20 @@ export default function NewCredentials() {
                 required
                 onChange={(e) => setNewPassword(e.target.value)}
               />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="password" className="mb-[5px]">
+                Repeat your password
+              </label>
+              <input
+                type="password"
+                className="rounded-xl py-[5px] px-[15px]"
+                placeholder="your password again"
+                name="password"
+                required
+                onChange={(e) => setNewPasswordConfirmation(e.target.value)}
+              />
+              <p className="text-red-600">{error}</p>
             </div>
           </div>
           <div>

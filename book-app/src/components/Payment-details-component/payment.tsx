@@ -4,12 +4,14 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "@/redux/slice";
+import { RootInterface } from "@/types/user";
+import { PaymentProps } from "@/types/payment";
 
-export default function PaymentDetails(properties) {
+export default function PaymentDetails(properties : PaymentProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isPaymentMade, setIsPaymentMade] = useState(false);
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state : RootInterface) => state.user.user);
   const dispatch = useDispatch();
   const [verified, setVerified] = useState(false);
 

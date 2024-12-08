@@ -153,6 +153,9 @@
   .header-element {
     padding-right: 33px;
   }
+  .emailInput {
+    width: 350px;
+  }
 }
 
 @media (max-width: 490px) {
