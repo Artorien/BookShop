@@ -15,7 +15,7 @@ export type IToc = {
 };
 
 export type IEpubViewProps = {
-  url: string | Blob;
+  url: string | Blob | ArrayBuffer;
   epubInitOptions?: Partial<BookOptions>;
   epubOptions?: Partial<RenditionOptionsFix>;
   epubViewStyles?: IEpubViewStyle;
