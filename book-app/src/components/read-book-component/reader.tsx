@@ -8,23 +8,10 @@ export function Basic({ blob }: { blob: Blob }) {
   const [largeText, setLargeText] = useState(false);
   const rendition = useRef<Rendition | undefined>(undefined);
   const [location, setLocation] = useState<string | number>(0);
-  const blobUrl = useRef<string>();
 
-  // const bebra = URL.createObjectURL(blob);
-  // console.log(bebra);
   useEffect(() => {
     rendition.current?.themes.fontSize(largeText ? "140%" : "100%");
   }, [largeText]);
-
-  // useEffect(() => {
-  //   blobUrl.current = URL.createObjectURL(blob);
-
-  //   return () => {
-  //     if (blobUrl.current) {
-  //       URL.revokeObjectURL(blobUrl.current); // Clean up the URL
-  //     }
-  //   };
-  // }, [blob]);
 
   return (
     <Example
