@@ -61,7 +61,7 @@ export class EpubView extends Component<IEpubViewProps, IEpubViewState> {
     if (this.book) {
       this.book.destroy();
     }
-    this.book = Epub(url, epubInitOptions);
+    this.book = Epub(url as string | ArrayBuffer, epubInitOptions);
     this.book.loaded.navigation.then(({ toc }) => {
       this.setState(
         {

@@ -25,7 +25,7 @@ export function Basic({ blob }: { blob: Blob }) {
       }
     >
       <ReactReader
-        url={blob || ""}
+        url={blob}
         location={location}
         locationChanged={(loc: string) => setLocation(loc)}
         getRendition={(_rendition: Rendition) => {
