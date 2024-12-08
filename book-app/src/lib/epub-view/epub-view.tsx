@@ -15,7 +15,7 @@ export type IToc = {
 };
 
 export type IEpubViewProps = {
-  url: string | ArrayBuffer;
+  url: string | Blob;
   epubInitOptions?: Partial<BookOptions>;
   epubOptions?: Partial<RenditionOptionsFix>;
   epubViewStyles?: IEpubViewStyle;
@@ -69,7 +69,9 @@ export class EpubView extends Component<IEpubViewProps, IEpubViewState> {
           toc: toc,
         },
         () => {
-          tocChanged && tocChanged(toc);
+          if (tocChanged) {
+            tocChanged(toc);
+          }
           this.initReader();
         }
       );
@@ -123,7 +125,9 @@ export class EpubView extends Component<IEpubViewProps, IEpubViewState> {
           rendition.next();
         };
         this.registerEvents();
-        getRendition && getRendition(rendition);
+        if (getRendition) {
+          getRendition(rendition);
+        }
 
         if (typeof location === "string" || typeof location === "number") {
           rendition.display(location + "");
@@ -152,7 +156,9 @@ export class EpubView extends Component<IEpubViewProps, IEpubViewState> {
     const newLocation = `${loc.start}`;
     if (location !== newLocation) {
       this.location = newLocation;
-      locationChanged && locationChanged(newLocation);
+      if (locationChanged) {
+        locationChanged(newLocation);
+      }
     }
   };
 

@@ -16,11 +16,12 @@ import {
   DropdownMenuSeparator,
   DropdownMenuLabel,
 } from "@radix-ui/react-dropdown-menu";
+import { AppDispatch } from "@/redux/store";
 const dataSource = data;
 
 export default function Header() {
   const { user, logout } = useAuth();
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const pathname = usePathname();
   console.log(pathname);
   const handleSearch = (query: string) => {

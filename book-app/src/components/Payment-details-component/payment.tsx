@@ -7,11 +7,11 @@ import { setUser } from "@/redux/slice";
 import { RootInterface } from "@/types/user";
 import { PaymentProps } from "@/types/payment";
 
-export default function PaymentDetails(properties : PaymentProps) {
+export default function PaymentDetails(properties: PaymentProps) {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [isPaymentMade, setIsPaymentMade] = useState(false);
-  const user = useSelector((state : RootInterface) => state.user.user);
+  const user = useSelector((state: RootInterface) => state.user.user);
   const dispatch = useDispatch();
   const [verified, setVerified] = useState(false);
 
@@ -30,7 +30,7 @@ export default function PaymentDetails(properties : PaymentProps) {
 
     const session_id = properties.sessionId;
     if (session_id && user && !verified) {
-      verifyPayment(session_id, user?.token);
+      verifyPayment(session_id, user?.jwtToken);
     }
   }, [user, properties.sessionId, verified]);
 

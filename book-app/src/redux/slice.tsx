@@ -1,7 +1,44 @@
 "use client";
 
 import { SearchResponse } from "@/lib/data";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { Book } from "@/types/book";
+import { Page } from "@/types/search";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+interface SearchState {
+  searchValues: Page<Book>;
+}
+
+const initialState: SearchState = {
+  searchValues: {
+    content: [],
+    pageable: {
+      sort: {
+        sorted: false,
+        unsorted: true,
+        empty: true,
+      },
+      offset: 0,
+      pageSize: 0,
+      pageNumber: 0,
+      paged: true,
+      unpaged: false,
+    },
+    totalPages: 0,
+    totalElements: 0,
+    last: false,
+    size: 0,
+    number: 0,
+    sort: {
+      sorted: false,
+      unsorted: true,
+      empty: true,
+    },
+    first: false,
+    numberOfElements: 0,
+    empty: true,
+  },
+};
 
 const headerSlice = createSlice({
   name: "isStore",
@@ -15,24 +52,25 @@ const headerSlice = createSlice({
   },
 });
 
-export const fetchSearchValues = createAsyncThunk(
+export const fetchSearchValues = createAsyncThunk<Page<Book>, string>(
   "searchValues/fetchSearchValues",
   async (query: string) => {
     const response = await SearchResponse(query);
-    return response;
+    return response.json();
   }
 );
 
 const searchSlice = createSlice({
   name: "searchValues",
-  initialState: {
-    searchValues: [],
-  },
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchSearchValues.fulfilled, (state, action) => {
-      state.searchValues = action.payload;
-    });
+    builder.addCase(
+      fetchSearchValues.fulfilled,
+      (state, action: PayloadAction<Page<Book>>) => {
+        state.searchValues = action.payload;
+      }
+    );
   },
 });
 

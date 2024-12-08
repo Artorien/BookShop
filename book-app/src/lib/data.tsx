@@ -1,3 +1,5 @@
+import { RedirectToCheckoutOptions } from "@stripe/stripe-js";
+
 export const MyBooks = async (page: number) => {
   const response = await fetch("http://localhost:8080/all?page=" + page);
 
@@ -62,7 +64,7 @@ export const createCheckoutSession = async (
   token: string,
   bookTitle: string,
   price: number
-): Promise<any> => {
+): Promise<RedirectToCheckoutOptions> => {
   try {
     const response = await fetch(
       "http://localhost:8080/create-checkout-session",

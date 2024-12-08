@@ -22,9 +22,11 @@ export default function NewCredentials() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (newPasswordConfirmation == newPassword) {
-      setError("");
-      updateUserDetails(user?.email, newEmail, newPassword);
+    if (newPasswordConfirmation == newPassword && user) {
+      if (updateUserDetails) {
+        setError("");
+        updateUserDetails(user.email, newEmail, newPassword);
+      }
     } else {
       setError("Your password mismatch. Please try again");
     }

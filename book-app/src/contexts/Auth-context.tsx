@@ -11,23 +11,14 @@ import {
 import { useDispatch } from "react-redux";
 import { toast } from "sonner";
 import { clearUser } from "@/redux/slice";
-import { RootInterface } from "@/types/user";
+import { AuthContextType } from "@/types/auth";
 
-const AuthContext = createContext({
+const AuthContext = createContext<AuthContextType>({
   user: null,
   error: "",
   loading: true,
-  registration: async (email: string, password: string) => {},
-  verification: async (token: string) => {},
-  updateUserDetails: async (
-    oldemail: string,
-    newemail: string,
-    password: string
-  ) => {},
   verificationMessage: "",
-  login: async (email: string, password: string) => {},
   loginMessage: "",
-  logout: () => {},
 });
 
 interface AuthProviderProps {
@@ -99,9 +90,11 @@ export default function AuthProvider({ children }: AuthProviderProps) {
       setUser(userData);
       setVerificationMessage("Email has been successfully verified");
       localStorage.setItem("user", JSON.stringify(userData));
-      isNewCredentials
-        ? toast("Credentials were updated successfully")
-        : toast("You`re registered");
+      if (isNewCredentials) {
+        toast("Credentials were updated successfully");
+      } else {
+        toast("You`re registered");
+      }
       setIsNewCredentials(false);
       setTimeout(() => {
         router.push("/profile");

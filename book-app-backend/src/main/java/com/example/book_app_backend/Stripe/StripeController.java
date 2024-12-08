@@ -132,6 +132,7 @@ public class StripeController {
                 if ("paid".equals(session.getPaymentStatus()))
                 {
                     String bookTitle = session.getMetadata().get("bookTitle");
+                    System.out.println("BOOK: " + bookTitle);
 
                     purchaseService.handleSuccesfullPayment(session.getCustomerEmail(), bookTitle);
 

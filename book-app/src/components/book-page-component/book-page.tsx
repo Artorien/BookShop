@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import { useBook } from "@/hooks/use-book";
 import "./style.scss";
 
-export default function BookPageComponent(properties : BookProperties) {
+export default function BookPageComponent(properties: BookProperties) {
   // const [book, setBook] = useState(null);
   // const user = useSelector((state) => state.user.user);
   // const dispatch = useDispatch();
@@ -115,7 +115,11 @@ export default function BookPageComponent(properties : BookProperties) {
             <button
               className="rounded-xl text-[1.1rem] flex items-center justify-center border py-[5px] px-[15px] mt-[10px] signup w-[200px] bookTitle"
               onClick={() =>
-                handleCheckout(user?.token || "", book?.title || "", book?.price || 0)
+                handleCheckout(
+                  user?.jwtToken || "",
+                  book?.title || "",
+                  book?.price || 0
+                )
               }
             >
               Buy

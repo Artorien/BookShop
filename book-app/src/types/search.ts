@@ -1,6 +1,6 @@
 import { Book } from "./book";
 
-interface Page<T> {
+export interface Page<T> {
   content: T[];
   pageable: {
     sort: {

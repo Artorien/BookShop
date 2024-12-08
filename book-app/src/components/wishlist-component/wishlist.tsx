@@ -50,7 +50,7 @@ export default function WishlistComponent(properties: UserInterface) {
           setSize(response.size);
         }
       } catch (error) {
-        console.error("Failed to fetch wishlist data");
+        console.error("Failed to fetch wishlist data: " + error);
       } finally {
         setIsLoading(false);
       }
