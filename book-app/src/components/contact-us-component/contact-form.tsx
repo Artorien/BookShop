@@ -67,7 +67,7 @@ export function ContactForm() {
         <div className="flex flex-col items-center">
           <button
             type="submit"
-            className="py-[5px] px-[15px] bg-white rounded-xl w-[150px]"
+            className="py-[5px] px-[15px] bg-white rounded-xl w-[150px] sendButton"
           >
             Send
           </button>
