@@ -21,6 +21,7 @@ export default function MyShop() {
     (state: RootState) => state.searchValues.searchValues
   );
   const dispatch = useDispatch();
+  console.log("Data: " + searchData.content);
 
   const fetchBooks = useCallback(async (page: number) => {
     setIsLoading(true);
@@ -78,7 +79,11 @@ export default function MyShop() {
   // };
 
   useEffect(() => {
-    setSize(searchData.size);
+    if (searchData.content.length > 0) {
+      setSize(searchData.size);
+    } else {
+      setSize(0);
+    }
   }, [searchData.size]);
 
   useEffect(() => {

@@ -26,7 +26,7 @@ export default function Login() {
   };
 
   return (
-    <div className="w-full flex justify-center items-center flex-col pt-[50px]">
+    <div className="w-full flex justify-center items-center flex-col pt-[90px]">
       <h2 className="text-[2rem] mb-[25px]">Sign In here</h2>
       <div className="bg-[#f7f7f7] rounded-xl p-[30px]">
         <form
@@ -69,7 +69,7 @@ export default function Login() {
               )}
               <button
                 type="submit"
-                className="py-[5px] px-[15px] bg-white rounded-xl w-[150px]"
+                className="py-[5px] px-[15px] bg-white rounded-xl w-[150px] signinButton"
               >
                 Sign In
               </button>

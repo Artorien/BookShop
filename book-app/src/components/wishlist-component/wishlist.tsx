@@ -23,8 +23,6 @@ export default function WishlistComponent(properties: UserInterface) {
   );
   const user = useSelector((state: RootInterface) => state.user.user);
 
-  console.log("Data: " + wishlistData);
-
   // Why this code is bad: fetching the data each re-render, so added `useCallBack`. Also added try-catch
   // const handleWishlistRetrieve = async (token: string, page: number) => {
   //   setIsLoading(true);
@@ -72,8 +70,9 @@ export default function WishlistComponent(properties: UserInterface) {
       setWishlistData([]);
       const updatedUser = { ...user, wishlist: [] };
       localStorage.setItem("user", JSON.stringify(updatedUser));
+      dispatch(setUser(updatedUser));
     }
-  }, [clearWishlist, user]);
+  }, [clearWishlist]);
 
   useEffect(() => {
     handleWishlistRetrieve(properties.user.jwtToken, page);

@@ -73,7 +73,7 @@ export default function UserProfile() {
                 My Wishlist:
               </h1>
               <Link href={"/wishlist"}>
-                <button className="border rounded-xl py-[5px] px-[15px] text-[1rem] bg-[#f7f7f7] flex justify-center items-center">
+                <button className="border rounded-xl py-[5px] px-[15px] text-[1rem] bg-[#f7f7f7] flex justify-center items-center wishListButton">
                   Go to my Wishlist
                   <span>
                     <svg

@@ -43,6 +43,7 @@
 @media (max-width: 862px) {
   .aboutMainBlock {
     padding: 40px;
+    padding-top: 90px;
   }
   .imageBlock {
     width: auto;
@@ -58,9 +59,6 @@
 }
 
 @media (max-width: 580px) {
-  .title {
-    font-size: 1.8rem;
-  }
   .text1,
   .text2,
   .text3 {
@@ -68,11 +66,6 @@
   }
   .aboutMainBlock {
     padding: 20px;
+    padding-top: 90px;
   }
-}
-
-@media (max-width: 466px) {
-    .title {
-        font-size: 1.6rem;
-    }
 }

@@ -158,6 +158,21 @@
   }
 }
 
+@media (max-width: 670px) {
+  .signinButton {
+    width: 211px;
+  }
+  .goback {
+    width: 211px;
+  }
+  .signupButton {
+    width: 211px;
+  }
+  .changeButton {
+    width: 211px;
+  }
+}
+
 @media (max-width: 490px) {
   .childContainer {
     margin-inline: 15px;

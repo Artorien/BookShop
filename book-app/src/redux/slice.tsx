@@ -56,7 +56,7 @@ export const fetchSearchValues = createAsyncThunk<Page<Book>, string>(
   "searchValues/fetchSearchValues",
   async (query: string) => {
     const response = await SearchResponse(query);
-    return response.json();
+    return response;
   }
 );
 

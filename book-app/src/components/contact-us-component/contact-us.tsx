@@ -30,7 +30,7 @@ export default function ContactUs() {
             </div>
             <div className="hidden linkBlock">
               <Link href="/contact-us">
-                <button className="border rounded-xl py-[5px] px-[15px] text-[1rem] bg-[#f7f7f7] flex justify-center items-center">
+                <button className="border rounded-xl py-[5px] px-[15px] text-[1rem] bg-[#f7f7f7] flex justify-center items-center contactUsButton">
                   Write us an email
                   <span>
                     <svg

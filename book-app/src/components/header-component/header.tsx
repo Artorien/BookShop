@@ -17,13 +17,14 @@ import {
   DropdownMenuLabel,
 } from "@radix-ui/react-dropdown-menu";
 import { AppDispatch } from "@/redux/store";
+import WishListButton from "../wishlist-component/wishlist-dialog-button";
 const dataSource = data;
 
 export default function Header() {
   const { user, logout } = useAuth();
   const dispatch = useDispatch<AppDispatch>();
   const pathname = usePathname();
-  console.log(pathname);
+
   const handleSearch = (query: string) => {
     dispatch(fetchSearchValues(query));
   };
@@ -92,15 +93,15 @@ export default function Header() {
                   <path d="M3 6h18" />
                 </svg>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-white shadow-md rounded border border-gray-200 p-2">
+              <DropdownMenuContent className="bg-white shadow-md rounded border border-gray-200 p-2 z-10">
                 <DropdownMenuLabel>
-                  <p>Menu</p>
+                  <p className="font-medium">Menu</p>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="border-t my-1" />
                 {dataSource.map((data, index) => (
                   <DropdownMenuItem key={index}>
                     <Link href={data.link}>
-                      <div className="flex justify-between w-[100px] items-center my-[10px]">
+                      <div className="flex justify-between w-[135px] items-center my-[10px]">
                         <p className="text-gray-700 burgerItem">{data.name}</p>
                         <span>{data.icon}</span>
                       </div>
@@ -110,14 +111,14 @@ export default function Header() {
                 <DropdownMenuSeparator className="border-t my-1" />
                 <DropdownMenuItem>
                   <Link href={"/registration"}>
-                    <button className="border rounded-xl py-1 px-4 mt-[5px] text-sm bg-white text-black signup w-[100px]">
+                    <button className="border rounded-xl py-1 px-4 mt-[5px] text-sm bg-white text-black signup w-[135px]">
                       Sign Up
                     </button>
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
                   <Link href={"/login"}>
-                    <button className="border rounded-xl py-1 px-4 mt-[5px] text-sm bg-black text-white signin w-[100px]">
+                    <button className="border rounded-xl py-1 px-4 mt-[5px] text-sm bg-black text-white signin w-[135px]">
                       Sign In
                     </button>
                   </Link>
@@ -158,42 +159,30 @@ export default function Header() {
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-white shadow-md rounded border border-gray-200 p-2 z-10">
                 <DropdownMenuLabel>
-                  <p>Menu</p>
+                  <p className="font-medium">Menu</p>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className="border-t my-1" />
-                <DropdownMenuItem>
-                  <Link href={"/library"}>
-                    <p className="text-gray-700 burgerItem">My Library</p>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href={"/shop"}>
-                    <p className="text-gray-700 burgerItem">Shop</p>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href={"/contact"}>
-                    <p className="text-gray-700 burgerItem">Contact</p>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href={"/about"}>
-                    <p className="text-gray-700 burgerItem">About Us</p>
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem>
-                  <Link href={"/profile"}>
-                    <p className="text-gray-700 burgerItem">Profile</p>
-                  </Link>
-                </DropdownMenuItem>
+                {dataSource.map((data, index) => (
+                  <DropdownMenuItem key={index}>
+                    <Link href={data.link}>
+                      <div className="flex justify-between w-[135px] items-center my-[10px]">
+                        <p className="text-gray-700 burgerItem">{data.name}</p>
+                        <span>{data.icon}</span>
+                      </div>
+                    </Link>
+                  </DropdownMenuItem>
+                ))}
                 <DropdownMenuItem>
                   <button
-                    className="border rounded-xl py-1 px-4 mt-[5px] text-sm bg-black text-white hover:bg-red-600"
+                    className="border rounded-xl py-1 px-4 mt-[5px] w-[135px] text-sm bg-black text-white hover:bg-red-600"
                     onClick={logout}
                   >
                     Log Out
                   </button>
                 </DropdownMenuItem>
+                {pathname === "/wishlist" ? (
+                  <WishListButton jwtToken={user?.jwtToken}></WishListButton>
+                ) : null}
               </DropdownMenuContent>
             </DropdownMenu>
 

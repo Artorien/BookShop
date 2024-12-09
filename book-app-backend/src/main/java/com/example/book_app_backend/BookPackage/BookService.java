@@ -22,6 +22,10 @@ public class BookService {
         Page<Book> books = bookRepository.findAll(pageable);
         List<Book> listedProducts = new ArrayList<>(books.getContent());
 
+        if (!listedProducts.isEmpty()) {
+            pageable = PageRequest.of(page, listedProducts.size());
+        }
+
         return new PageImpl<>(convert(listedProducts), pageable, books.getTotalElements());
     }
 
@@ -50,7 +54,7 @@ public class BookService {
             return new PageImpl<>(response, pageable, bookRepository.findAll(pageable).getTotalElements());
         }
 
-        Page<Book> books = bookRepository.findAllByTitleContaining(pageable, name);
+        Page<Book> books = bookRepository.findAllByTitleContainingIgnoreCase(pageable, name);
         List<Book> foundBooks = new ArrayList<>(books.getContent());
 
         if (foundBooks.isEmpty()) {

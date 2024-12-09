@@ -3,6 +3,7 @@ package com.example.book_app_backend.UserPackage;
 import com.example.book_app_backend.BookPackage.Book;
 import com.example.book_app_backend.PurchasePackage.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +22,8 @@ public class UserService {
     private JavaMailSender mailSender;
     @Autowired
     private PurchaseService purchaseService;
+    @Value("${FRONTEND_URL}")
+    private String url;
 
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
@@ -37,7 +40,7 @@ public class UserService {
 
     public void sendEmail(User user, String token) {
         String subject = "Email Verification";
-        String verificationURL = "http://localhost:3000/verification?token=" + token;
+        String verificationURL = url + token;
         String message = "Please click the following link to verify your email: " + verificationURL;
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
