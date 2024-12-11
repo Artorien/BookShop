@@ -1,49 +1,45 @@
 import { RedirectToCheckoutOptions } from "@stripe/stripe-js";
 
+const url = "https://egreg.xyz";
+
 export const MyBooks = async (page: number) => {
-  const response = await fetch("http://localhost:8080/all?page=" + page);
+  const response = await fetch(`${url}/all?page=` + page);
 
   return response.json();
 };
 
 export const SearchResponse = async (name: string) => {
-  const response = await fetch("http://localhost:8080/search?name=" + name);
+  const response = await fetch(`${url}/search?name=` + name);
 
   return response.json();
 };
 
 export const AddToWishList = async (title: string, token: string) => {
-  const response = await fetch(
-    "http://localhost:8080/addtowishlist?title=" + title,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(`${url}/addtowishlist?title=` + title, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
 
   return response.json();
 };
 
 export const removeFromWishList = async (title: string, token: string) => {
-  const response = await fetch(
-    "http://localhost:8080/removefromwishlist?title=" + title,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    }
-  );
+  const response = await fetch(`${url}/removefromwishlist?title=` + title, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  });
 
   return response;
 };
 
 export const getWishList = async (token: string, page: number) => {
-  const response = await fetch("http://localhost:8080/wishlist?page=" + page, {
+  const response = await fetch(`${url}/wishlist?page=` + page, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -55,7 +51,7 @@ export const getWishList = async (token: string, page: number) => {
 };
 
 export const getBookByTitle = async (title: string) => {
-  const response = await fetch("http://localhost:8080/book?title=" + title);
+  const response = await fetch(`${url}/book?title=` + title);
 
   return response.json();
 };
@@ -66,17 +62,14 @@ export const createCheckoutSession = async (
   price: number
 ): Promise<RedirectToCheckoutOptions> => {
   try {
-    const response = await fetch(
-      "http://localhost:8080/create-checkout-session",
-      {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ bookTitle, price }),
-      }
-    );
+    const response = await fetch(`${url}/create-checkout-session`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ bookTitle, price }),
+    });
 
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
@@ -91,7 +84,7 @@ export const createCheckoutSession = async (
 };
 
 export const MyLibrary = async (token: string) => {
-  const response = await fetch("http://localhost:8080/mybooks", {
+  const response = await fetch(`${url}/mybooks`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -103,7 +96,7 @@ export const MyLibrary = async (token: string) => {
 };
 
 export const clearTheWishlist = async (token: string) => {
-  const response = await fetch("http://localhost:8080/clearwishlist", {
+  const response = await fetch(`${url}/clearwishlist`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -117,7 +110,7 @@ export const clearTheWishlist = async (token: string) => {
 };
 
 export const readBook = async (token: string, title: string) => {
-  const response = await fetch("http://localhost:8080/read?title=" + title, {
+  const response = await fetch(`${url}/read?title=` + title, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -127,9 +120,7 @@ export const readBook = async (token: string, title: string) => {
 
   if (response.ok) {
     const blob = await response.blob();
-    // const objectURL = URL.createObjectURL(blob);
-    // console.log("URL in response: " + objectURL);
-    // return objectURL;
+
     return blob;
   }
 };

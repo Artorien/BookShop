@@ -31,7 +31,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
   const [verificationMessage, setVerificationMessage] = useState("");
   const [loginMessage, setLoginMessage] = useState("");
   const router = useRouter();
-  const url = "http://localhost:8080/";
+  const url = "https://egreg.xyz/";
   const [isNewCredentials, setIsNewCredentials] = useState(false);
   const dispatch = useDispatch();
   const [loading, setIsLoading] = useState(true);
@@ -110,7 +110,7 @@ export default function AuthProvider({ children }: AuthProviderProps) {
     password: string
   ) => {
     setIsNewCredentials(true);
-    const response = await fetch("http://localhost:8080/newcredentials", {
+    const response = await fetch("https://egreg.xyz/newcredentials", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
