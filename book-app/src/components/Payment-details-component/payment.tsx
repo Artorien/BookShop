@@ -14,6 +14,7 @@ export default function PaymentDetails(properties: PaymentProps) {
   const user = useSelector((state: RootInterface) => state.user.user);
   const dispatch = useDispatch();
   const [verified, setVerified] = useState(false);
+  const url = "https://egreg.xyz";
 
   useEffect(() => {
     const parsedUser = localStorage.getItem("user");
@@ -37,7 +38,7 @@ export default function PaymentDetails(properties: PaymentProps) {
   const verifyPayment = async (session_id: string, token: string) => {
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:8080/payment/verify", {
+      const response = await fetch(`${url}/payment/verify`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

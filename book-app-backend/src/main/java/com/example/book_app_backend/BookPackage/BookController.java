@@ -98,7 +98,7 @@ public class BookController {
                     .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + book.getItemKey() + "\"")
                     .body(resource);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ResponseJSON("Failed to fetch the book from S3"));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
 
